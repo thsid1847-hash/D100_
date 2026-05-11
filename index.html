@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>100일 💜</title>
+
+<!-- Pretendard -->
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"/>
+
+<!-- MaruBuri -->
+<link href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css"
+rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+
+  min-height:100vh;
+  overflow:hidden;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:20px;
+
+  font-family:"Pretendard", sans-serif;
+
+  background:
+    linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)),
+    url("01.jpg");
+
+  background-size:cover;
+  background-position:center;
+
+  position:relative;
+}
+
+/* 영화 필름 느낌 */
+
+body::before{
+
+  content:"";
+
+  position:fixed;
+  inset:0;
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,.025),
+      rgba(255,255,255,.025) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+
+  opacity:.18;
+
+  pointer-events:none;
+
+  animation:flicker .15s infinite;
+}
+
+@keyframes flicker{
+
+  0%{ opacity:.16; }
+  50%{ opacity:.2; }
+  100%{ opacity:.18; }
+}
+
+/* 별빛 */
+
+.star{
+
+  position:fixed;
+
+  width:3px;
+  height:3px;
+
+  background:white;
+
+  border-radius:50%;
+
+  animation:twinkle 2s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+
+  0%,100%{
+    opacity:.2;
+    transform:scale(.5);
+  }
+
+  50%{
+    opacity:1;
+    transform:scale(1.8);
+  }
+}
+
+/* 카드 */
+
+.card{
+
+  width:100%;
+  max-width:430px;
+
+  background:
+    rgba(0,0,0,.42);
+
+  border:
+    1px solid rgba(255,255,255,.12);
+
+  backdrop-filter:blur(12px);
+
+  border-radius:30px;
+
+  padding:42px 30px;
+
+  text-align:center;
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.45);
+
+  position:relative;
+  z-index:5;
+
+  animation:fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn{
+
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* 상단 하트 */
+
+.top{
+
+  font-size:52px;
+
+  margin-bottom:12px;
+
+  animation:heartbeat 1.4s infinite;
+}
+
+@keyframes heartbeat{
+
+  0%,100%{
+    transform:scale(1);
+  }
+
+  30%{
+    transform:scale(1.12);
+  }
+
+  50%{
+    transform:scale(.95);
+  }
+}
+
+/* 제목 */
+
+.title{
+
+  font-family:"MaruBuri", serif;
+
+  color:white;
+
+  font-size:48px;
+
+  font-weight:400;
+
+  letter-spacing:2px;
+
+  margin-bottom:26px;
+}
+
+/* 문구 */
+
+.message{
+
+  color:rgba(255,255,255,.95);
+
+  font-size:22px;
+
+  line-height:2;
+
+  margin-bottom:42px;
+}
+
+.highlight{
+
+  color:#d8b4fe;
+  font-weight:700;
+}
+
+/* 버튼 */
+
+.btn-container{
+
+  position:relative;
+
+  width:280px;
+  height:60px;
+
+  margin:0 auto;
+}
+
+.btn{
+
+  position:absolute;
+  top:0;
+
+  width:120px;
+  height:52px;
+
+  border:none;
+  border-radius:999px;
+
+  font-family:"Pretendard", sans-serif;
+
+  font-size:18px;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.2s;
+}
+
+.btn:active{
+  transform:scale(.96);
+}
+
+/* YES */
+
+.yes{
+
+  left:0;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8b5cf6,
+      #c084fc
+    );
+
+  color:white;
+
+  box-shadow:
+    0 8px 25px rgba(139,92,246,.45);
+}
+
+/* NO */
+
+.no{
+
+  left:160px;
+
+  background:#f3f3f3;
+  color:#333;
+}
+
+/* 하트 */
+
+.heart{
+
+  position:fixed;
+
+  pointer-events:none;
+
+  z-index:999;
+
+  animation:float 5s linear forwards;
+}
+
+@keyframes float{
+
+  0%{
+    transform:translateY(0) scale(.8);
+    opacity:1;
+  }
+
+  100%{
+    transform:translateY(-800px) scale(1.8);
+    opacity:0;
+  }
+}
+
+/* 엔딩 화면 */
+
+.ending-screen{
+
+  position:fixed;
+  inset:0;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background:
+    linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)),
+    url("02.jpg");
+
+  background-size:cover;
+  background-position:center;
+
+  z-index:9999;
+
+  opacity:0;
+  pointer-events:none;
+
+  transition:1.2s ease;
+}
+
+/* 활성화 */
+
+.ending-screen.show{
+
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* 엔딩 내용 */
+
+.ending-content{
+
+  text-align:center;
+
+  color:white;
+
+  animation:endingFade 2s ease;
+}
+
+@keyframes endingFade{
+
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.ending-heart{
+
+  font-size:62px;
+
+  margin-bottom:20px;
+
+  animation:heartbeat 1.5s infinite;
+}
+
+.ending-content h1{
+
+  font-family:"MaruBuri", serif;
+
+  font-size:64px;
+
+  font-weight:400;
+
+  letter-spacing:6px;
+
+  margin-bottom:30px;
+}
+
+.ending-content p{
+
+  font-size:24px;
+
+  line-height:2;
+
+  color:rgba(255,255,255,.92);
+}
+
+/* 하단 */
+
+.credit{
+
+  margin-top:40px;
+
+  font-size:16px;
+
+  letter-spacing:4px;
+
+  color:rgba(255,255,255,.55);
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- 별빛 -->
+
+<script>
+
+for(let i=0;i<45;i++){
+
+  const star=document.createElement("div");
+
+  star.className="star";
+
+  star.style.left=Math.random()*100+"vw";
+
+  star.style.top=Math.random()*100+"vh";
+
+  star.style.animationDelay=Math.random()*2+"s";
+
+  document.body.appendChild(star);
+}
+
+</script>
+
+<!-- 메인 카드 -->
+
+<div class="card">
+
+  <div class="top">
+    💌
+  </div>
+
+  <div class="title">
+    ♥ D+100 ♥
+  </div>
+
+  <div class="message">
+
+    여보야 우리 벌써<br>
+
+    <span class="highlight">
+      100일
+    </span>
+    이야 🥰😍<br><br>
+
+    천년만년 평생!<br>
+    나 사랑해 줄 거지?🎀
+
+  </div>
+
+  <!-- 버튼 -->
+
+  <div class="btn-container">
+
+    <button class="btn yes" id="yesBtn">
+      웅 💜
+    </button>
+
+    <button class="btn no" id="noBtn">
+      응가 💩
+    </button>
+
+  </div>
+
+</div>
+
+<!-- 엔딩 화면 -->
+
+<div class="ending-screen" id="endingScreen">
+
+  <div class="ending-content">
+
+    <div class="ending-heart">
+      💜
+    </div>
+
+    <h1>MY LOVE</h1>
+
+    <p>
+
+      여보야 나 좋아해줘서<br>
+      너무 고마워 💖<br>
+      내가 더 잘 할게 💋<br>
+      앞으로도 잘 부탁해<br>
+      내 인생의 행복은 여보야 💐💍
+
+    </p>
+
+    <div class="credit">
+      WITH YOU FOREVER
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+const yesBtn=
+document.getElementById("yesBtn");
+
+const noBtn=
+document.getElementById("noBtn");
+
+const endingScreen=
+document.getElementById("endingScreen");
+
+/* YES 버튼 */
+
+yesBtn.addEventListener("click",()=>{
+
+  createHearts();
+
+  setTimeout(()=>{
+
+    endingScreen.classList.add("show");
+
+  },600);
+
+});
+
+/* 하트 생성 */
+
+function createHearts(){
+
+  const hearts=[
+    "💜",
+    "✨",
+    "💫",
+    "💍"
+  ];
+
+  for(let i=0;i<55;i++){
+
+    const heart=
+    document.createElement("div");
+
+    heart.className="heart";
+
+    heart.innerHTML=
+      hearts[Math.floor(Math.random()*hearts.length)];
+
+    heart.style.left=
+      Math.random()*100+"vw";
+
+    heart.style.top="100vh";
+
+    heart.style.fontSize=
+      (20+Math.random()*35)+"px";
+
+    heart.style.animationDuration=
+      (3+Math.random()*3)+"s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+      heart.remove();
+    },6000);
+  }
+}
+
+/* NO 버튼 도망 */
+
+function moveNo(){
+
+  const container=
+  document.querySelector(".btn-container");
+
+  const maxX=
+  container.clientWidth-noBtn.offsetWidth;
+
+  const maxY=
+  container.clientHeight-noBtn.offsetHeight;
+
+  const x=Math.random()*maxX;
+
+  const y=Math.random()*maxY;
+
+  noBtn.style.left=x+"px";
+
+  noBtn.style.top=y+"px";
+}
+
+noBtn.addEventListener(
+  "mouseenter",
+  moveNo
+);
+
+noBtn.addEventListener(
+  "touchstart",
+  (e)=>{
+
+    e.preventDefault();
+
+    moveNo();
+
+  },
+  { passive:false }
+);
+
+noBtn.addEventListener(
+  "click",
+  (e)=>{
+
+    e.preventDefault();
+
+    moveNo();
+
+  }
+);
+
+</script>
+
+</body>
+</html>
